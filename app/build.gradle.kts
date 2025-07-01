@@ -3,9 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
-
 }
 
 android {
@@ -56,26 +53,6 @@ dependencies {
 
     //Compose Navigation
     implementation("androidx.navigation:navigation-compose:2.9.0")
-
-    // ------------------------------------------------------
-    // 🌐 NETWORKING
-    // ------------------------------------------------------
-
-    // Retrofit + Moshi
-    implementation("com.squareup.retrofit2:retrofit:3.0.0") // Retrofit
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
-    implementation("com.squareup.moshi:moshi:1.15.2")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
-
-    // ------------------------------------------------------
-    // 🔐 DEPENDENCY INJECTION
-    // ------------------------------------------------------
-
-    //Hilt
-    implementation("com.google.dagger:hilt-android:2.56.2")
-    ksp("com.google.dagger:hilt-android-compiler:2.56.2")
-
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
