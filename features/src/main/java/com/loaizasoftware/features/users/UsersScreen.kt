@@ -1,20 +1,34 @@
 package com.loaizasoftware.features.users
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.loaizasoftware.core.composables.AsyncImageWithLoader
+import com.loaizasoftware.core.composables.LoaderIndicator
 import com.loaizasoftware.core.ext.showToast
 import com.loaizasoftware.core.ui.UiState
 import com.loaizasoftware.domain.models.User
@@ -28,8 +42,7 @@ fun UsersScreen(viewModel: UsersViewModel, paddingValues: PaddingValues) {
     when (uiState) {
 
         is UiState.Loading -> {
-            //Show Loader
-            CircularProgressIndicator(color = Color.Blue)
+            LoaderIndicator()
         }
 
         is UiState.Success -> {
@@ -52,21 +65,66 @@ fun UsersList(users: List<User>, paddingValues: PaddingValues) {
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
-            .background(Color.White)
+            .background(Color.White),
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
 
         items(users.size) { i ->
+            UserItemRow(users[i])
+        }
 
-            val user = users[i]
+    }
+
+}
+
+@Composable
+fun UserItemRow(user: User) {
+
+    Row(modifier = Modifier
+        .height(100.dp)
+        .fillMaxWidth()
+        .border(
+            width = 2.dp,
+            color = Color.Gray,
+            shape = RoundedCornerShape(12.dp)
+        )
+        .clip(RoundedCornerShape(12.dp))
+        .padding(16.dp)
+    ) {
+
+        AsyncImageWithLoader(user.photoUrl)
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        Column {
 
             Text(
-                text = user.name + user.lastname,
+                text = "${user.name} ${user.lastname}",
                 style = MaterialTheme.typography.bodyLarge
+            )
+
+            Text(
+                text = "${user.age} years old",
+                style = MaterialTheme.typography.bodyMedium
+            )
+
+            Text(
+                text = "${user.email}",
+                style = TextStyle(
+                    color = Color.Blue,
+                    fontSize = 15.sp,
+                    fontStyle = FontStyle.Italic
+                )
             )
 
         }
 
+
+
     }
+
+
 
 }
 

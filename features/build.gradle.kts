@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose) //Enable Compose
 
-    id("com.google.devtools.ksp")
+    id("com.google.devtools.ksp") // Kotlin Symbol Processing
     id("com.google.dagger.hilt.android")
 
 }
@@ -47,24 +47,21 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":domain"))
 
+
+    // ----------------------------
+    // 🔷 ANDROID X
+    // ----------------------------
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0") // Lifecycle ViewModel
 
-    // Compose BOM (manages all Compose versions)
-    implementation(platform("androidx.compose:compose-bom:2024.03.00"))
-
-    // Core UI elements
+    // ----------------------------
+    // 🔷 COMPOSE CORE
+    // ----------------------------
+    implementation(platform("androidx.compose:compose-bom:2024.03.00")) // Compose BOM (manages all Compose versions)
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling-preview")
-
-    // Lifecycle ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-
-    // Kotlin Coroutines (recommended to include)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
 
     // ------------------------------------------------------
