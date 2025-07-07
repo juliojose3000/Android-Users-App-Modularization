@@ -1,4 +1,4 @@
-package com.loaizasoftware.usersapp_modularization.ui.theme
+package com.loaizasoftware.usersapp_modularization.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
