@@ -1,4 +1,4 @@
-package com.loaizasoftware.usersapp_modularization.presentation
+package com.loaizasoftware.usersapp_modularization.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
